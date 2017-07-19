@@ -1,0 +1,324 @@
+
+Linux经常用到的命令
+
+1. Linux下用vim打开配置文件乱码，在终端输入：“LANG=”即可。
+
+2. 查看端口是否被占用：
+
+3. netstat -anp | grep port
+
+    netstat -ltn
+
+4. lsof -i:port
+
+5. Shell脚本命令列表：
+
+$# 是传给脚本的参数个数
+
+$0 是脚本本身的名字
+
+$1 是传递给该shell脚本的第一个参数
+
+$2 是传递给该shell脚本的第二个参数
+
+$@ 是传给脚本的所有参数的列表
+
+$* 是以一个单字符串显示所有向脚本传递的参数，与位置变量不同，参数可超过个
+
+$$ 是脚本运行的当前进程ID号
+
+$? 是显示最后命令的退出状态，0表示没有错误，其他表示有错误
+
+6. find . -type f -name "*.sh" -type 查找某一类型的文件，诸如：b - 块设备文件。d - 目录。c - 字符设备文件。p - 管道文件。l - 符号链接文件。f - 普通文件。
+
+7. :n,$s/vivian/sky/ 替换第 n 行开始到最后一行中每一行的第一个 vivian 为 sky
+
+:n,$s/vivian/sky/g 替换第 n 行开始到最后一行中每一行所有 vivian 为 sky
+
+8. chown 用户名 文件路径
+
+9. chmod 777 test
+
+10. adduser password
+
+11. 在PC机器上不能进行点播操作(只是针对没有添加域名解析的PC机器)，但是在别的电脑上可以，那么就需要把别人的C:\Windows\System32\drivers\etc\hosts 覆盖自己的这个目录下的hosts文件。
+
+12. 12.C++中经常有代码后面加了”\” 表示换行，说明下面一句和上面是同一行的。
+
+13. du –sh 查看文件大小。
+
+14. shell 2>&1: & 1 更准确的说应该是文件描述符1, 而1一般代表的就是STDOUT_FILENO,实际上这个操作就是一个dup2(2)调用.他标准输出到all_result,然后复制标准输出到文件描述符2(STDERR_FILENO),其后果就是文件描述符1和2指向同一个文件表项,也可以说错误的输出被合并了.其中0表示键盘输入 1表示屏幕输出2表示错误输出.把标准出错重定向到标准输出,然后扔到/DEV/NULL下面去。通俗的说，就是把所有标准输出和标准出错都扔到垃圾桶里面。
+
+15. try_file
+
+try_files $uri $uri/ /index.php?q=$uri&$args;
+
+按顺序检查文件是否存在，返回第一个找到的文件。结尾的斜线表示为文件夹 -$uri/。如果所有的文件都找不到，会进行一个内部重定向到最后一个参数。
+
+16. date +%s 可以显示UTC的大整数时间相当于OS:Millionseconds()。
+
+17. date -d @1411266453 可以将时间转换成当前的年月日格式。
+
+18. date -d "1970-01-01 UTC 1411261790 seconds" 将一个随意的UTC时间转换为当前时间。
+
+19. ulimit -c unlimited 可以使系统产生core文件
+
+20. “grep -v \#” 获取不包含#号的所有行，其中“\”是转译字符，
+
+21. cut -d: -f1 获取的文本以“：”为分隔符，并且获取第一区域的值。
+
+22. grep返回值：
+
+成功，返回0；
+
+失败，文件存在，模板字符串不存在，返回1；
+
+失败，文件不存在，返回2；
+
+23. try_file
+
+try_files $uri $uri/ /index.php?q=$uri&$args;
+
+按顺序检查文件是否存在，返回第一个找到的文件。结尾的斜线表示为文件夹 -$uri/。如果所有的文件都找不到，会进行一个内部重定向到最后一个参数。
+
+24. umout .tmp可以解决因为在工程挺值前删除文件，造成的原有文件夹不能删除的问题。
+
+25. stat()
+
+相关函数：fstat, lstat, chmod, chown, readlink, utime
+
+头文件：#include <sys/stat.h> #include <unistd.h>
+
+定义函数：int stat(const char * file_name, struct stat *buf);
+
+用来将参数file_name 所指的文件状态, 复制到参数buf 所指的结构中,函数的返回值可以用于判断文件是否存在。
+
+26. inotify，可以用于监听文件路径或者文件。
+
+int fd = inotify_init ();
+
+int wd = inotify_add_watch (fd, path, mask);
+
+int ret = inotify_rm_watch (fd, wd);
+
+27. 同步、异步、阻塞、非阻塞IO模型
+
+最后，再举几个不是很恰当的例子来说明这四个IO Model:
+
+有A(同步阻塞)，B(同步非阻塞)，C(异步阻塞)，D(异步非阻塞)四个人在钓鱼：
+
+A用的是最老式的鱼竿，所以呢，得一直守着，等到鱼上钩了再拉杆；
+
+B的鱼竿有个功能，能够显示是否有鱼上钩，所以呢，B就和旁边的MM聊天，隔会再看看有没有鱼上钩，有的话就迅速拉杆；
+
+C用的鱼竿和B差不多，但他想了一个好办法，就是同时放好几根鱼竿，然后守在旁边，一旦有显示说鱼上钩了，它就将对应的鱼竿拉起来；
+
+D是个有钱人，干脆雇了一个人帮他钓鱼，一旦那个人把鱼钓上来了，就给D发个短信。
+
+28. popen()函数用创建管道的方式启动一个进程,并调用shell.因为管道是被定义成单向的,所以type参数只能定义成只读或者只写,不能是两者同时,结果流也相应的是只读或者只写.
+
+command参数是一个字符串指针,指向的是一个以null结束符结尾的字符串,这个字符串包含一个shell命令.这个命令被送到/bin/sh以-c参数执行,即由shell来执行.type参数也是一个指向以null结束符结尾的字符串的指针,这个字符串必须是'r'或者'w’来指明是读还是写.
+
+popen()函数的返回值是一个普通的标准I/O流,它只能用pclose()函数来关闭,而不是fclose().函数.向这个流的写入被转化为对command命令的标准输入;而command命令的标准输出则是和调用popen(),函数的进程相同，除非这个被command命令自己改变.相反的,读取一个“被popen了的”流,就相当于读取command命令的标准输出,而command的标准输入则是和调用popen,函数的进程相同.
+
+注意,popen函数的输出流默认是被全缓冲的.
+
+pclose函数等待相关的进程结束并返回一个command命令的退出状态,就像wait4函数一样方
+
+可以用来在程序中返回命令结果：popen( "ls -l", "r" );可以返回文件列表;
+
+popen( "du -sk", "r" )可以用来返回剩余空间。
+
+29. libaio的工作流程
+
+libaio工作流程:
+
+io_prep_pread()/io_prep_pwrite() 设置读写操作参数
+
+io_submit() 提交
+
+io_getevents() 检查结果
+
+30. uname –a 查看系统所有信息，-r查看所有，如果是红帽子，可以用cat /etc/issue
+
+31. 匹配所有空行：^[ \t]*$[\n\r]
+
+32. 解压命令 tar -zvxf ***
+
+33. 通过ulimit -n，我们可以得到一个进程所能够打开的fd的最大数.
+
+34. pwdx pid用来查看正在运行的线程所在的目录
+
+35. stun服务器的启动方法：./server -v -b -h 121.14.85.205 -a 121.14.85.206
+
+36. pstack可以用来查看Linux程序运行过程中的堆栈。
+
+37. rpm -qa|grep -i mysql用来检查是否已经安装了mysql
+
+38. rm -f /etc/my.cnf 删除mysql其他路径下的配置和数据文件
+
+39. rm -rf /var/lib/mysql删除mysql其他路径下的配置和数据文件
+
+40. mysql> set GLOBAL max_connections=300;设置mysql的最大连接数
+
+41. mysqladmin -uroot -pcoship variables检查mysql的最大连接数。
+
+42. tar -xzvf Redis_2.4.7.tar.gz解压缩包。
+
+43. getenforce 检查seLinux的状态
+
+44. vi /etc/selinux/config在配置中关闭seLinux
+
+45. setenforce 0使上面的配置生效。
+
+46. service iptables status检查防火墙状态
+
+47. chkconfig iptables off关闭防火墙，重启后生效
+
+48. service iptables stop 关闭防火墙及时生效 iptables –F也可以生效
+
+49. rpm -ivh vsftpd-2.0.5-16.el5_4.1.x86_64.rpm强制安装vsftp
+
+50. /sbin/chkconfig --list vsftpd检查ftp的启动状态
+
+51. /sbin/chkconfig --level 2345 vsftpd on开启或者关闭ftp的某个状态
+
+52. adduser -g ftp -s /sbin/nologin -d /mpeg cdnftper添加ftp用户
+
+53. chkconfig --list mysql检查mysql是否随机启动
+
+54. chkconfig --add mysql让mysql随机启动。
+
+55. tcpdump -i eth0 -t tcp -s 60000 -w diaoxian.cap 抓包
+
+56. tcpdump –I eth0 tcp port 554 –w test.cap
+
+查看电脑配置
+
+57. cat /proc/cpuinfo 查看cpu
+
+free -m 查看内存
+
+fdisk -l查看硬盘分区
+
+df -h 查看挂载目录
+
+ifconfig查看网卡信息
+
+ethtool eth0查看详西的网卡工作模式
+
+lspic列出所有芯片信息，比如声卡，显卡，网卡等。
+
+58. cat /etc/issue 查看当前系统的发布版本
+
+59. uname –a查看当前系统的内核信息
+
+60. rpm -e --nodeps mysql-libs-5.1.73-3.el6_5.x86_64强制卸载mysql
+
+61. select table_name,table_rows from tables where TABLE_SCHEMA = 'olaj' order by table_rows desc;
+
+62. netstat –tnl | grep 3306
+
+63. %s/((http|ftp|https)://)(([a-zA-Z0-9\._-]+\.[a-zA-Z]{2,6})|([0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}))(:[0-9]{1,4})*(/[a-zA-Z0-9\&%_\./-~-]*)?/\ / 匹配链接。
+
+64. grep -r -n '.*_LOG.*[LoadXML|parse]' ./ grep的用法，-n表示行号, -i表示忽略大小写。
+
+65. 清空系统日志，腾出空间
+
+rm -rf /var/log/*.gz
+
+rm -rf /var/log/*.1
+
+echo "" > /var/log/dmesg
+
+echo "" > /var/log/kern.log
+
+echo "" > /var/log/messages
+
+echo "" > /var/log/syslog
+
+66. 查找当前目录所有文件所占的磁盘空间
+
+du -lh --max-depth=1
+
+67. g++ hello.cpp -save-temps 可以保存编译时产生的临时文件。
+
+68. 添加网络邻居：netsh -c "i i" add neighbors 13 "172.30.25.246" "b8-ca-3a-f2-f4-c8"
+
+69. 查看当前网络的发送接收：dstat
+
+70. du -h --max-depth=1 work/testing/*可以查看目录下的所有文件的占用磁盘情况
+
+71-73 略
+
+74. openssl engine –t查看是否有ssl硬件加速设备
+75. pgrep redis-server | wc –l查看启动某个线程的数目。
+76. rsync -avlP --exclude="log" 把除去log的其他东西备份
+77. echo –e 允许后面的内容进行转译
+78. echo -e "\e[32;40;1;4m are success\e[0m"输出的字体是带颜色的
+79. #cat /proc/cpuinfo |grep "cores"|uniq 查看cpu核数
+80. getconf PAGESIZE 查询nginx中fastcgi_buffer_size应该配置多少。
+81. 怎样遍历一些字段
+startorder="redisserver,cpm,cls,cl,cg,rtcl,cdnadapter,ci"
+for module in $(echo $startorder | tr ',' '\n')
+do
+done
+82. 转码命令
+./ffmpeg -i ./bjqn/DragonTV.Beijing.Youth.Ep02.HDTV.720p.x264-CHDTV.mkv -fpre vod -acodec copy -y ./bjqn02.mp4
+83. find ../download/ -maxdepth 1 -type f -mmin +120 | grep -v heartbeat.xml | xargs -n 1 rm -f
+84. sort -k3nr file
+K3指按第三个域去排序
+n 指定分类是域上的数字分类。
+r 就是降序的意思
+85. 1>/dev/null表示将命令的标准输出重定向到/dev/null
+2>/dev/null表示将命令的错误输出重定向到/dev/null
+86. find . -name "*.c" | xargs grep main
+87. du –sk查看当前目录已用空间。
+88. tar –jxvf tar-bz2的解压命令
+89. stat -c %Y filename 检查某文件的最后修改时间。
+90. mysql -uroot -pcoship dbname < dbname.sql mysql直接导入数据
+91. SELECT table_name,column_name,column_type from information_schema.COLUMNS where TABLE_SCHEMA="ott_r002_portalms" and data_type in ('int','bigint','decimal')防止ID越界。
+92. SELECT TABLE_SCHEMA,TABLE_NAME,round((DATA_LENGTH+INDEX_LENGTH)/1024/1024,2) as mb from information_schema.TABLES HAVING mb>500数据库空间不够，查看详细。
+93. awk -F'[&,=,.,/]' 'NR==6{print $3}' tmpfile awk锁定第几行
+94. ps -A|awk '/进程名/{print $1}'查出某进程号。
+95. nohup ping www.ibm.com & 在后台运行程序
+96. setsid ping www.ibm.com 在后台运行程序
+97. (ping www.ibm.com &) 在后台运行程序
+98. screen、disown也可以实现响应的功能。
+99. !! 执行上一次执行过的命令。
+100. !s 执行历史中以s开头的命令
+101. watch -d ls –l 让某一命令持续执行默认两秒一次
+102. pgrep ssh 查找出与ssh相关的进程的pid
+103. CTRL+d 快速推出登录终端，CTRL+U删除一整行（vim插入 模式有效）
+104. cd – 返回你上一次所在的目录
+105. touch -c -t 0801010800 filename.c修改文件的时间
+106. $_上一个命令的最后一个参数
+107. ss –t –a 显示tcp连接
+108. cat /proc/46720/environ 获得当前进程依赖的环境变量.
+109. /proc/net/dev存储了网卡信息；
+110. grep eth /proc/net/dev|awk -F : '{print $2}'|awk '{print $1, $9}' 查看网卡带宽
+111. /etc/passwd /etc/shadow存放Linux系统的用户和密码
+
+112. grep "http://202.105.136.35:18080/" -rl ./ 显示含此条目的文件名
+113. awk 'END{print NR}' tmp;统计一个文本的行数。
+114. ps auxw|head -1;ps auxw|sort -rn -k3|head -10查看最耗cpu的10-个程序；
+115. 治疗动态库找不到：ln -s /usr/lib64/libcrypto.so libcrypto.so.6
+116. ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]' 查找僵尸进程
+117. ps -A -o stat,ppid,pid,cmd | grep -e '^[Zz]' | awk '{print $2}' | xargs kill -9 查找并kill掉僵尸进程
+118. 数据库查询实现笛卡尔积：select x+y+1 ,x+y+1 from (select 0 as x from dual union select 1 from dual union select 2 from dual) a,(select 0 as y from dual union select 1 from dual union select 2 from dual) b;
+批绑定：FORALL i IN 1 .. 10000000
+INSERT a …
+119. ./ffmpeg -i /mpeg/ad1.ts 2>&1 | grep 'Duration' | cut -d ' ' -f 4,8 | sed s/,//获取文件的码率
+120. thread apply all bt gdb –c core.1111后，可用此命令查看所有线程。
+121. netstat -n | awk '/^tcp/ {++y[$NF]} END {for(w in y) print w, y[w]} 统计所有TCP链接的状态数
+
+122. df –h [目录名]可查询当前目录属于哪个分区
+123. iptables -I INPUT -p tcp -m state --state NEW -m tcp --dport 22122 -j ACCEPT打开防火墙的某个端口/etc/init.d/iptables save将防火墙设置保存。netstat -unltp | grep fdfs
+124. vim /etc/rc.d/rc.local设置开机启动
+125. CenterOS 设置防火墙firewall-cmd --zone=public --add-port=5000/tcp --permanent
+firewall-cmd –reload
+
+126. wget -S http://httpd.apache.org/images/httpd_logo_wide_new.png 2>&1 | grep ‘Accept-Ranges’
+Accept-Ranges: bytes 测试服务器是否支持断点续传功能
+127. curl –range 0-99 http://images/billboard_iphone_hero.jpg测试服务器是否支持断点续传
+128. 后台服务器是否支持长连接：netstat –n | grep TIME_WAIT，如果不支持长连接那么就会有很多TIME_WAIT状态。
