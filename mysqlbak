@@ -1,0 +1,10 @@
+#!/bin/bash
+#sh for alex-20170705
+#mysql backup
+DB_NAME="hive"
+DB_USER="root"
+DB_PASS="123456"
+BCK_DIR="/root/lsf/sh"
+DATE=`date +%F`
+mysqldump -u$DB_USER -p$DB_PASS $DB_NAME | gzip >$BCK_DIR/db_$DATE.gz
+                                                                                                                                              
